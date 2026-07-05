@@ -14,7 +14,8 @@ def register(request):
         form = UserCreationForm(data = request.POST)
 
         if form.is_valid():
-            new_user = form.save()
+            new_user = form.save(commit=False)
+            form.save()
             #Log in the user and then redirect to home page.
             login(request, new_user) ## Takes two thing request and new user object
             return redirect('learning_logs:index')
